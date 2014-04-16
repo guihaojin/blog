@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Hello World!
+title: I Love Li Qian! :-)
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
