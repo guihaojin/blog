@@ -3,7 +3,7 @@ layout: post
 title: 我为什么喜欢Ruby
 description: ""
 category:
-tags: [ruby]
+tags: [Ruby]
 ---
 {% include JB/setup %}
 
@@ -55,7 +55,7 @@ Ruby版本：
 		end
 	end
 	print "fib(6)=", fib(6), "\n"
-	
+
 当然这个程序用Python实现会更简洁因为连那两个end行都可以省略。有些人喜欢Python那种用缩进来表示代码块的方式，但是我个人并不那么喜欢，因为一旦程序的逻辑复杂了，就容易弄错缩进的层次。我自己有几次都是由于没有注意到这种缩进而写出了逻辑上不是我想要的Python程序。同时Python的缩进用tab跟空格不一样有时候也让人有点恼火。
 
 * **irb**
@@ -71,7 +71,7 @@ Ruby是我目前见过的最纯粹面向对象语言，而且Ruby在面相对象
 就定义了三个getter方法，分别是get_x, get_y和get_z, 而一行
 
 	attr_accessor :x, :y, :z
-	
+
 则定义了六个方法，分别是get_x, get_y, get_z和set_x(x), set_y(y), set_z(z)。有点神奇吧。:-) 当然对Ruby而言这根本不算什么。
 
 #### Ruby真正的杀手锏
