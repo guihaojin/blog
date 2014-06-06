@@ -22,7 +22,7 @@ tags: [Ruby]
 	require "trollop"
 
 	opts = Trollop::options do
-  		opt :environment, "the environment to run the script against.", :type => :string
+  	  opt :environment, "the environment to run the script against.", :type => :string
 	end
 
 `require "trollop"`是为了包含这个库。下面最重要的一行是在代码块（block）中的:
@@ -36,7 +36,24 @@ tags: [Ruby]
 就打印出来了我们从命令行中传入的`environment`值。假如说我保存这个脚本为`test.rb`。那么我们只要就可以运行`ruby test.rb --environment production`。这样就会打印出`Running the script against environment: production.`如何知道都有哪些选项呢？运行一下`ruby test.rb --help`就可以看到如下内容：
 
 	Options:
-	 --environment, -e <s>:   the environment to run the script against.
-             	--help, -h:   Show this message
+	  --environment, -e <s>:   the environment to run the script against.
+	             --help, -h:   Show this message
              	
 这些是Trollop为我们自动生成了，同时我们可以看到，对于我们的environment option, 不经可以用long option:`--environment`，还可以用short option:`-e`。对于help也同样可以用`--help`或者是`-h`。而且这个帮助也是Trollop自动生成的，完全不需要我们做额外的工作。
+
+现在假设我们需要run一个benchmark,需要加一个运行次数的选项。那么我们只需要在程序块中加一行：
+
+	opt :number, "running for this number of times", :type => :int
+	
+这样我们的帮助就变成了:
+
+	Options:
+	  --environment, -e <s>:   the environment to run the script against.
+           --number, -n <i>:   running for this number of times
+                 --help, -h:   Show this message
+           	 
+然后我们就可以运行`ruby test.rb -e staging -n 7`传入环境变量staging跟运行次数7了。
+
+细心的读者可能发现，自动生成的short format往往就是long format的第一个字母。没错！那这样的话如果第一个字母相同怎么办呢？作者已经为我们设计好了算法来解决这种冲突。只要查看`--help`就可以看到每个选项的正确名称。而且如果我们不喜欢自动生成了选项名或者是帮助信息的话也可以自己来配置。总而言之，Trollop已经很贴心的帮我们做好了一切，但同时也给我们自己去customize的自由。可谓是懒人必备啊！关于Trollop更高级的用法以及更细致的语法，网上有很多资料可以参考。在此只是抛砖引玉。
+
+其实Trollop这个词本身的意思的蛮有意思的，哈哈。:-)
