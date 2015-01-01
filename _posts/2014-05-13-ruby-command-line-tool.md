@@ -19,11 +19,11 @@ tags: [Ruby]
 
 然后现在假设一个场景。我们要写一个脚本，这个脚本需要能够在不同的环境下运行，假如是production/staging。所以我们在运行它的时候就希望可以带不同的环境选项(options)。如下一个程序就可以完成这个任务。
 
-	require "trollop"
-
-	opts = Trollop::options do
-  	  opt :environment, "the environment to run the script against.", :type => :string
-	end
+{% highlight ruby %}
+opts = Trollop::options do
+  opt :environment, "the environment to run the script against.", :type => :string
+end
+{% endhighlight %}
 
 `require "trollop"`是为了包含这个库。下面最重要的一行是在代码块（block）中的:
 
