@@ -3,7 +3,7 @@ layout: post
 title: "七周七语言笔记1: Ruby"
 description: ""
 category:
-tags: ["programming languages"]
+tags: ["programming languages", "seven languages in seven weeks", "Ruby"]
 ---
 {% include JB/setup %}
 
