@@ -15,14 +15,14 @@ tags: ["async", "HTTP", "eventmachine"]
 
 [Sinatra ](http://www.sinatrarb.com/)是一个Ruby的micro-framework。为了简单起见，我们就用它来实现我们的Server。代码如下：
 
-```
+{% highlight Ruby %}
 require "sinatra"
 
 get "/slow" do
   sleep 2
   "slow"
 end
-```
+{% endhighlight %}
 
 这里只有一个`/slow` route，它先sleep 2秒，然后返回”slow”给client。这里的sleep就是模拟一个长时间执行的任务。假设代码保存在server.rb里，在Terminal里运行`ruby server.rb`，我们的测试server就准备好了。可以用浏览器打开`localhost:4567/slow`(4567是Sinatra默认端口)，等上大约2秒，就可以看到server返回的“slow”。
 
@@ -30,7 +30,7 @@ end
 
 先上代码：
 
-```
+{% highlight Ruby %}
 require "rest-client"
 
 # a slow response route
@@ -47,11 +47,11 @@ n.times do |i|
 end
 
 p "Time elapsed: #{Time.now - start_time} s.”
-```
+{% endhighlight %}
 
 这里做的事情很简单，就是连续call我们之前准备的server的10次，同时打印出时间戳，并计算总共用时多少。将代码保存在sync_client.rb文件中，然后运行`ruby sync_client.rb`就有类似于以下的结果：
 
-```
+{% highlight Ruby %}
 "Start time: 2016-01-24 23:53:41 -0800"
 "Time now: 2016-01-24 23:53:43 -0800, response 0: slow"
 "Time now: 2016-01-24 23:53:45 -0800, response 1: slow"
@@ -64,7 +64,7 @@ p "Time elapsed: #{Time.now - start_time} s.”
 "Time now: 2016-01-24 23:53:59 -0800, response 8: slow"
 "Time now: 2016-01-24 23:54:01 -0800, response 9: slow"
 "Time elapsed: 20.087692 s.”
-```
+{% endhighlight %}
 
 可以看到，每次call之间的间隔2秒，10次call总共花了大约20秒。
 
@@ -72,7 +72,7 @@ p "Time elapsed: #{Time.now - start_time} s.”
 
 还是先上代码：
 
-```
+{% highlight Ruby %}
 require "eventmachine"
 require "em-http-request"
 
@@ -93,11 +93,11 @@ EventMachine.run do
 
   p "After HttpRequest."
 end
-```
+{% endhighlight %}
 
 这里用到了Ruby的一个叫[eventmachine](https://github.com/eventmachine/eventmachine)的library和[em-http-request](https://github.com/igrigorik/em-http-request)这样一个Asynchronous HTTP client。稍微解释一下代码，这里最难理解的可能就是EventMachine部分，`EventMachine.run do`后面一直到`end`之前就是我们主要的逻辑(Ruby里的do…end就相当于{…})。这里面同样是做了10次HTTP call到http://localhost:4567/slow，在这之后还输出一句`After HttpRequest.`。运行这段代码我们可以看到类似于如下的结果：
 
-```
+{% highlight Ruby %}
 "Start time: 2016-01-25 20:14:33 -0800"
 "After HttpRequest."
 "Time now: 2016-01-25 20:14:35 -0800, response 0: slow"
@@ -110,7 +110,7 @@ end
 "Time now: 2016-01-25 20:14:35 -0800, response 5: slow"
 "Time now: 2016-01-25 20:14:35 -0800, response 1: slow"
 "Time now: 2016-01-25 20:14:35 -0800, response 9: slow"
-```
+{% endhighlight %}
 
 这里面有三点需要注意：
 
